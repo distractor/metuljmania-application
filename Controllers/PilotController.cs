@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using MetuljmaniaDatabase.BL;
+using MetuljmaniaDatabase.Bl;
 using MetuljmaniaDatabase.Models.BlModel;
 using MetuljmaniaDatabase.Models.DTO;
 using Microsoft.AspNetCore.Authorization;
@@ -69,9 +69,9 @@ namespace MetuljmaniaDatabase.Controllers
         [HttpPut("{id}")]
         [Consumes("application/json")]
         [AllowAnonymous]
-        public async Task<ActionResult> PutUserAsync(int id, EditPilotDTO pilot)
+        public async Task<ActionResult> PutPilotAsync(int id, EditPilotDTO pilot)
         {
-            // Edit User.
+            // Edit Pilot.
             var pilotBlModel = _mapper.Map<PilotBlModel>(pilot);
             await _pilotBl.PutPilotAsync(id, pilotBlModel);
 

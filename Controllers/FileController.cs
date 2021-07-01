@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using MetuljmaniaDatabase.BL;
+using MetuljmaniaDatabase.Bl;
 using MetuljmaniaDatabase.Models.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

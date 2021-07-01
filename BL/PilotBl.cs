@@ -6,7 +6,7 @@ using System;
 using System.Security.Principal;
 using System.Threading.Tasks;
 
-namespace MetuljmaniaDatabase.BL
+namespace MetuljmaniaDatabase.Bl
 {
     public class PilotBl : BaseBl, IPilotBl
     {

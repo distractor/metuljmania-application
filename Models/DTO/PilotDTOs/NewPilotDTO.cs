@@ -84,7 +84,6 @@ namespace MetuljmaniaDatabase.Models.DTO
         /// </summary>
         public string PolicyNumber { get; set; }
 
-
         /// <summary>
         /// Sponsor list.
         /// </summary>
@@ -94,11 +93,6 @@ namespace MetuljmaniaDatabase.Models.DTO
         /// Email.
         /// </summary>
         public string Email { get; set; }
-
-        /// <summary>
-        /// Password.
-        /// </summary>
-        public string Password { get; set; }
 
         /// <summary>
         /// First name.

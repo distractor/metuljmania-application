@@ -4,11 +4,10 @@ using MetuljmaniaDatabase.Models.BlModel;
 using MetuljmaniaDatabase.Models.DbModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Principal;
 using System.Threading.Tasks;
 
-namespace MetuljmaniaDatabase.BL
+namespace MetuljmaniaDatabase.Bl
 {
     public class EventBl : BaseBl, IEventBl
     {

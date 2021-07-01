@@ -1,7 +1,7 @@
 ﻿using MetuljmaniaDatabase.Models.BlModel;
 using System.Threading.Tasks;
 
-namespace MetuljmaniaDatabase.BL
+namespace MetuljmaniaDatabase.Bl
 {
     public interface IPilotBl
     {

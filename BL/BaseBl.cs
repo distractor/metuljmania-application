@@ -2,7 +2,7 @@
 using NLog;
 using System.Security.Principal;
 
-namespace MetuljmaniaDatabase.BL
+namespace MetuljmaniaDatabase.Bl
 {
     public class BaseBl
     {

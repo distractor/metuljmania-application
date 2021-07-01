@@ -1,6 +1,6 @@
 using AutoMapper;
 using Glista.Core.Models.Models;
-using MetuljmaniaDatabase.BL;
+using MetuljmaniaDatabase.Bl;
 using MetuljmaniaDatabase.DAL;
 using MetuljmaniaDatabase.Logic;
 using MetuljmaniaDatabase.Providers;

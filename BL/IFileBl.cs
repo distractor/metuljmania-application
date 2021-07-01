@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 
-namespace MetuljmaniaDatabase.BL
+namespace MetuljmaniaDatabase.Bl
 {
     public interface IFileBl
     {

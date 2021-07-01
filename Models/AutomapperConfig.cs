@@ -86,7 +86,7 @@ namespace Glista.Core.Models.Models
 
             CreateMap<PilotBlModel, NewPilotDTO>()
                 .ReverseMap();
-            
+
             CreateMap<PilotBlModel, EditPilotDTO>()
                 .ReverseMap();
 

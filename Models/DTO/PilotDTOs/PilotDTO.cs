@@ -125,11 +125,6 @@ namespace MetuljmaniaDatabase.Models.DTO
         public string Email { get; set; }
 
         /// <summary>
-        /// Password.
-        /// </summary>
-        public string Password { get; set; }
-
-        /// <summary>
         /// First name.
         /// </summary>
         public string FirstName { get; set; }
