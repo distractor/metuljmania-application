@@ -20,6 +20,14 @@ namespace MetuljmaniaDatabase.Bl
         Task<PilotBlModel> GetPilotAsync(int id);
 
         /// <summary>
+        /// Get pilot by id.
+        /// </summary>
+        /// <param name="id">Pilot id.</param>
+        /// <param name="password">Pilot password.</param>
+        /// <returns></returns>
+        Task<PilotBlModel> GetPilotAsync(int id, string password);
+
+        /// <summary>
         /// Insert new pilot.
         /// </summary>
         /// <param name="pilot">New pilot object.</param>

@@ -58,6 +58,28 @@ namespace MetuljmaniaDatabase.Controllers
             return Ok(pilotDTO);
         }
 
+        // GET api/<PilotController>/5
+        /// <summary>
+        /// Get pilot by id.
+        /// </summary>
+        /// <param name="id">Pilot id.</param>
+        /// <param name="password">Pilot password.</param>
+        /// <returns></returns>
+        [HttpGet("AuthenticatePilot")]
+        [AllowAnonymous]
+        public async Task<ActionResult<PilotDTO>> AuthenticatePilot(int id, string password)
+        {
+            // Get pilot.
+            var pilotBlModel = await _pilotBl.GetPilotAsync(id, password);
+            if (pilotBlModel == null)
+            {
+                return NotFound();
+            }
+            var pilotDTO = _mapper.Map<PilotDTO>(pilotBlModel);
+
+            return Ok(pilotDTO);
+        }
+
         // POST api/<PilotController>
         /// <summary>
         /// Insert new pilot.

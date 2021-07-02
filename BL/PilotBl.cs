@@ -48,6 +48,28 @@ namespace MetuljmaniaDatabase.Bl
         }
 
         ///<inheritdoc/>
+        public async Task<PilotBlModel> GetPilotAsync(int id, string password)
+        {
+            _logger.Info($"Get pilot with id {id}.");
+
+            var pilotDbModel = await _baseDAL.GetPilotAsync(id);
+            if (pilotDbModel is null)
+            {
+                throw new Exception($"Pilot with id {id} not found.");
+            }
+            if (pilotDbModel.Password != password)
+            {
+                _logger.Error("Wrong pilot password, returning empty object.");
+
+                return null;
+            }
+
+            var pilotModel = _mapper.Map<PilotBlModel>(pilotDbModel);
+
+            return pilotModel;
+        }
+
+        ///<inheritdoc/>
         public async Task PutPilotAsync(int id, PilotBlModel editPilotModel)
         {
             if (id != editPilotModel.Id)
