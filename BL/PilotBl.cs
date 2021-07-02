@@ -3,6 +3,7 @@ using MetuljmaniaDatabase.DAL;
 using MetuljmaniaDatabase.Models.BlModel;
 using MetuljmaniaDatabase.Models.DbModels;
 using System;
+using System.Collections.Generic;
 using System.Security.Principal;
 using System.Threading.Tasks;
 
@@ -18,6 +19,17 @@ namespace MetuljmaniaDatabase.Bl
         }
 
         #region Public methods.
+
+        ///<inheritdoc/>
+        public async Task<List<PilotBlModel>> GetPilotsAsync()
+        {
+            _logger.Info($"Get pilots.");
+
+            var pilotsDbModel = await _baseDAL.GetPilotsAsync();
+            var pilotsBlModel = _mapper.Map<List<PilotBlModel>>(pilotsDbModel);
+
+            return pilotsBlModel;
+        }
 
         ///<inheritdoc/>
         public async Task<PilotBlModel> GetPilotAsync(int id)

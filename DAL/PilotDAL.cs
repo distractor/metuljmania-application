@@ -1,12 +1,24 @@
 ﻿using MetuljmaniaDatabase.Models.DbModels;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MetuljmaniaDatabase.DAL
 {
     public partial class BaseDAL
     {
+        ///<inheritdoc/>
+        public async Task<List<Pilot>> GetPilotsAsync()
+        {
+            _logger.Info($"Get pilots from database.");
+
+            using var dbMetuljmaniaContext = new MetuljmaniaContext(_options);
+            var pilot = await dbMetuljmaniaContext.Pilot.ToListAsync();
+
+            return pilot;
+        }
+
         ///<inheritdoc/>
         public async Task<Pilot> GetPilotAsync(int id)
         {

@@ -81,6 +81,10 @@ namespace Glista.Core.Models.Models
 
             #region Pilot.
 
+            CreateMap<PilotBlModel, BasicInfoDTO>()
+                .AfterMap((s, d) => d.Name = $"{s.FirstName} {s.LastName}")
+                .ReverseMap();
+
             CreateMap<PilotBlModel, PilotDTO>()
                 .ReverseMap();
 

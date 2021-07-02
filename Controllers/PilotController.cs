@@ -4,6 +4,7 @@ using MetuljmaniaDatabase.Models.BlModel;
 using MetuljmaniaDatabase.Models.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Security.Principal;
 using System.Threading.Tasks;
 
@@ -22,6 +23,22 @@ namespace MetuljmaniaDatabase.Controllers
         public PilotController(IMapper mapper, IPrincipal principal, IPilotBl pilotBl) : base(mapper, principal)
         {
             _pilotBl = pilotBl;
+        }
+
+        // GET: api/<PilotController>
+        /// <summary>
+        /// Get pilots basicinfo.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("GetPilotsBasicInfo")]
+        [AllowAnonymous]
+        public async Task<List<BasicInfoDTO>> GetPilotsBasicInfo()
+        {
+            // Get Pilots.
+            var pilotBlModels = await _pilotBl.GetPilotsAsync();
+            var pilotsDTOs = _mapper.Map<List<BasicInfoDTO>>(pilotBlModels);
+
+            return pilotsDTOs;
         }
 
         // GET api/<PilotController>/5

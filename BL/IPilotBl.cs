@@ -1,10 +1,16 @@
 ﻿using MetuljmaniaDatabase.Models.BlModel;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MetuljmaniaDatabase.Bl
 {
     public interface IPilotBl
     {
+        /// <summary>
+        /// Get pilots.
+        /// </summary>
+        /// <returns></returns>
+        Task<List<PilotBlModel>> GetPilotsAsync();
 
         /// <summary>
         /// Get pilot by id.

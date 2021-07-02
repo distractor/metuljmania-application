@@ -1,10 +1,17 @@
 ﻿using MetuljmaniaDatabase.Models.DbModels;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MetuljmaniaDatabase.DAL
 {
     public partial interface IBaseDAL
     {
+        /// <summary>
+        /// Get pilots.
+        /// </summary>
+        /// <returns></returns>
+        Task<List<Pilot>> GetPilotsAsync();
+
         /// <summary>
         /// Get pilot by id.
         /// </summary>
