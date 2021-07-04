@@ -32,7 +32,6 @@ namespace MetuljmaniaDatabase.Models.DbModels
         public string PolicyNumber { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? ModifiedDate { get; set; }
-        public string[] Sponsors { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public int? IppiFileId { get; set; }
@@ -40,6 +39,7 @@ namespace MetuljmaniaDatabase.Models.DbModels
         public int? CheckFileId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string Sponsors { get; set; }
 
         public virtual File CheckFile { get; set; }
         public virtual Event Event { get; set; }

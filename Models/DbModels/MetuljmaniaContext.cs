@@ -97,7 +97,7 @@ namespace MetuljmaniaDatabase.Models.DbModels
 
                 entity.Property(e => e.SafetyClass).HasMaxLength(50);
 
-                entity.Property(e => e.Sponsors).HasColumnType("character varying[]");
+                entity.Property(e => e.Sponsors).HasMaxLength(500);
 
                 entity.Property(e => e.Team).HasMaxLength(100);
 

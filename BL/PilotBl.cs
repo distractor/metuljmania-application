@@ -96,6 +96,9 @@ namespace MetuljmaniaDatabase.Bl
             var pdfDocument = pdfHelper.GenerateDocument(pilotBlModel);
             // Save the document.
             pdfDocument.Save(uploadFilePath);
+
+            // Notify pilot.
+            await NotifyPilot(pilotBlModel, uploadFilePath);
         }
 
         ///<inheritdoc/>
@@ -202,6 +205,31 @@ namespace MetuljmaniaDatabase.Bl
             var insertedPilotModel = await GetPilotAsync(insertedPilotDbModel.Id);
 
             return insertedPilotModel;
+        }
+
+        #endregion
+
+        #region Private methods.
+        ///<inheritdoc/>
+        private async Task NotifyPilot(PilotBlModel pilot, string filepath)
+        {
+            _logger.Info($"Notifying pilot {pilot.Id}.");
+
+            // Message.
+            var subject = "Application form generated";
+            var body = $"<h1>Hi, {pilot.FirstName} {pilot.LastName}!</h1><p>You registered for paragliding cross country competition <strong>{pilot.Event.Name}</strong> and a few seconds ago you have requested the official application form. Attached we are sending you the automatically generated application form (PDF).</p><p>Please check all the data on the attached file and: <ul><li>Use your digital identity to sign it and upload it back to our database or</li><li>bring a signed physical copy to the registration office.</li></ul></p><p>Thank you!</p>";
+
+            // Send message.
+            try
+            {
+                NotificationHelper client = new();
+                client.Send(pilot.Email, subject, body, filepath);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"Something went wrong wile sending email to {pilot.Email}.");
+                throw new Exception($"Something went wrong wile sending email to {pilot.Email}. Exception details: ${ex.Message}.");
+            }
         }
 
         #endregion
