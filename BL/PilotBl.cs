@@ -20,11 +20,13 @@ namespace MetuljmaniaDatabase.Bl
     {
         private readonly IBaseDAL _baseDAL;
         private readonly IEventBl _eventBl;
+        private readonly IFileBl _fileBl;
 
-        public PilotBl(IMapper mapper, IPrincipal principal, IBaseDAL baseDAL, IEventBl eventBl) : base(mapper, principal)
+        public PilotBl(IMapper mapper, IPrincipal principal, IBaseDAL baseDAL, IEventBl eventBl, IFileBl fileBl) : base(mapper, principal)
         {
             _baseDAL = baseDAL;
             _eventBl = eventBl;
+            _fileBl = fileBl;
         }
 
         #region Public methods.
@@ -96,6 +98,11 @@ namespace MetuljmaniaDatabase.Bl
             var pdfDocument = pdfHelper.GenerateDocument(pilotBlModel);
             // Save the document.
             pdfDocument.Save(uploadFilePath);
+
+            // Update pilot.
+            var uploadedFile = await _baseDAL.PostFilesAsync(new Models.DbModels.File { Path = uploadFilePath, PilotId = pilotBlModel.Id }, pilotBlModel.Id);
+            pilotBlModel.UnSignedApplicationFile = _mapper.Map<FileBlModel>(uploadedFile);
+            await _baseDAL.PutPilotAsync(_mapper.Map<Pilot>(pilotBlModel));
 
             // Notify pilot.
             await NotifyPilot(pilotBlModel, uploadFilePath);

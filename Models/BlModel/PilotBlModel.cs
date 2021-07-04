@@ -141,5 +141,15 @@ namespace MetuljmaniaDatabase.Models.BlModel
         /// Licence file.
         /// </summary>
         public FileBlModel LicenceFile { get; set; }
+
+        /// <summary>
+        /// Signed application file.
+        /// </summary>
+        public FileBlModel SignedApplicationFile { get; set; }
+
+        /// <summary>
+        /// Unsigned application file.
+        /// </summary>
+        public FileBlModel UnSignedApplicationFile { get; set; }
     }
 }

@@ -33,6 +33,8 @@ namespace MetuljmaniaDatabase.DAL
                 .Include(p => p.CheckFile)
                 .Include(p => p.LicenceFile)
                 .Include(p => p.IppiFile)
+                .Include(p => p.SignedApplicationFile)
+                .Include(p => p.UnSignedApplicationFile)
                 .FirstOrDefaultAsync(p => p.Id == id);
 
             return pilot;
@@ -98,6 +100,8 @@ namespace MetuljmaniaDatabase.DAL
                 pilotDbModel.IppiFileId = pilot.IppiFileId != 0 ? pilot.IppiFileId : null;
                 pilotDbModel.LicenceFileId = pilot.LicenceFileId != 0 ? pilot.LicenceFileId : null;
                 pilotDbModel.CheckFileId = pilot.CheckFileId != 0 ? pilot.CheckFileId : null;
+                pilotDbModel.SignedApplicationFileId = pilot.SignedApplicationFileId != 0 ? pilot.SignedApplicationFileId : null;
+                pilotDbModel.UnSignedApplicationFileId = pilot.UnSignedApplicationFileId != 0 ? pilot.UnSignedApplicationFileId : null;
                 pilotDbModel.Sponsors = pilot.Sponsors;
                 pilotDbModel.Email = pilot.Email;
                 pilotDbModel.FirstName = pilot.FirstName;

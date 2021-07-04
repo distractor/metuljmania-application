@@ -105,6 +105,16 @@ namespace MetuljmaniaDatabase.Models.DTO
         public int? CheckFileId { get; set; }
 
         /// <summary>
+        /// Signed application file.
+        /// </summary>
+        public int? SignedApplicationFileId { get; set; }
+
+        /// <summary>
+        /// Unsigned application file.
+        /// </summary>
+        public int? UnSignedApplicationFileId { get; set; }
+
+        /// <summary>
         /// Sponsor list.
         /// </summary>
         public string Sponsors { get; set; }

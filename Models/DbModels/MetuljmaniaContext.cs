@@ -121,6 +121,16 @@ namespace MetuljmaniaDatabase.Models.DbModels
                     .WithMany(p => p.PilotLicenceFile)
                     .HasForeignKey(d => d.LicenceFileId)
                     .HasConstraintName("LicenceFileId");
+
+                entity.HasOne(d => d.SignedApplicationFile)
+                    .WithMany(p => p.PilotSignedApplicationFile)
+                    .HasForeignKey(d => d.SignedApplicationFileId)
+                    .HasConstraintName("SignedFileId");
+
+                entity.HasOne(d => d.UnSignedApplicationFile)
+                    .WithMany(p => p.PilotUnSignedApplicationFile)
+                    .HasForeignKey(d => d.UnSignedApplicationFileId)
+                    .HasConstraintName("UnSignedFileId");
             });
 
             OnModelCreatingPartial(modelBuilder);

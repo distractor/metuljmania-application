@@ -115,6 +115,16 @@ namespace MetuljmaniaDatabase.Models.DTO
         public BasicInfoDTO CheckFile { get; set; }
 
         /// <summary>
+        /// Signed application file.
+        /// </summary>
+        public BasicInfoDTO SignedApplicationFile { get; set; }
+
+        /// <summary>
+        /// Unsigned application file.
+        /// </summary>
+        public BasicInfoDTO UnSignedApplicationFile { get; set; }
+
+        /// <summary>
         /// Sponsor list.
         /// </summary>
         public string Sponsors { get; set; }

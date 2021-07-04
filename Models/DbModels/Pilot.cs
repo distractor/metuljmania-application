@@ -40,11 +40,15 @@ namespace MetuljmaniaDatabase.Models.DbModels
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Sponsors { get; set; }
+        public int? SignedApplicationFileId { get; set; }
+        public int? UnSignedApplicationFileId { get; set; }
 
         public virtual File CheckFile { get; set; }
         public virtual Event Event { get; set; }
         public virtual File IppiFile { get; set; }
         public virtual File LicenceFile { get; set; }
+        public virtual File SignedApplicationFile { get; set; }
+        public virtual File UnSignedApplicationFile { get; set; }
         public virtual ICollection<File> File { get; set; }
     }
 }
