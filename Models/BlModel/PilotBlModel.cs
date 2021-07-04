@@ -50,7 +50,7 @@ namespace MetuljmaniaDatabase.Models.BlModel
         /// <summary>
         /// Address.
         /// </summary>
-        public string Adress { get; set; }
+        public string Address { get; set; }
 
         /// <summary>
         /// Flying since.

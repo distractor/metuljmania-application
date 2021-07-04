@@ -29,7 +29,7 @@ namespace MetuljmaniaDatabase.Bl
             var uploadedFile = new FileBlModel();
             try
             {
-                var datePath = FileManagerHelper.GetUploadDirectory(true);
+                var datePath = FileManagerHelper.GetUploadDirectory(Constants.uploadDirectory, true);
                 var uploadDir = Path.Combine(new[] { Constants.uploadDirectory, datePath });
 
                 // Obtain pilot.

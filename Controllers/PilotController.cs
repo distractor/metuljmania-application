@@ -98,6 +98,22 @@ namespace MetuljmaniaDatabase.Controllers
             return CreatedAtAction("GetPilot", new { id = insertedPilotDTO.Id }, insertedPilotDTO);
         }
 
+        // POST api/<PilotController>
+        /// <summary>
+        /// Create application form for pilot.
+        /// </summary>
+        /// <param name="pilotId">Pilot id</param>
+        /// <returns></returns>
+        [HttpPost("CreateApplicationFormAsync")]
+        [AllowAnonymous]
+        public async Task<ActionResult> CreateApplicationFormAsync(int pilotId)
+        {
+            // Post new event group.
+            await _pilotBl.CreateApplicationFormAsync(pilotId);
+
+            return Ok();
+        }
+
         // PUT: api/Pilot/5
         /// <summary>
         /// Update pilot.

@@ -35,6 +35,13 @@ namespace MetuljmaniaDatabase.Bl
         Task<PilotBlModel> PostPilotAsync(PilotBlModel pilot);
 
         /// <summary>
+        /// Create and send application form for pilot.
+        /// </summary>
+        /// <param name="pilotId">Pilot id.</param>
+        /// <returns></returns>
+        Task CreateApplicationFormAsync(int pilotId);
+
+        /// <summary>
         /// Edit pilot.
         /// </summary>
         /// <param name="id">Id.</param>

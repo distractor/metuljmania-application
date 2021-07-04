@@ -21,7 +21,7 @@ namespace MetuljmaniaDatabase.Models.DbModels
         public string Civlid { get; set; }
         public DateTime? BirthDate { get; set; }
         public string MobilePhone { get; set; }
-        public string Adress { get; set; }
+        public string Address { get; set; }
         public int? FlyingSince { get; set; }
         public string Team { get; set; }
         public string Nation { get; set; }

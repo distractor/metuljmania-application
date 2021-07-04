@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using MetuljmaniaDatabase.DAL;
+using MetuljmaniaDatabase.Helpers;
+using MetuljmaniaDatabase.Logic;
 using MetuljmaniaDatabase.Models.BlModel;
 using MetuljmaniaDatabase.Models.DbModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Security.Principal;
 using System.Threading.Tasks;
 
@@ -67,6 +70,26 @@ namespace MetuljmaniaDatabase.Bl
             var pilotModel = _mapper.Map<PilotBlModel>(pilotDbModel);
 
             return pilotModel;
+        }
+
+        ///<inheritdoc/>
+        public async Task CreateApplicationFormAsync(int pilotId)
+        {
+            _logger.Info($"Creating application form for pilot {pilotId}.");
+
+            // Get pilot details.
+            var pilotBlModel = await GetPilotAsync(pilotId);
+
+            // Create directory if needed.
+            var datePath = FileManagerHelper.GetUploadDirectory(Constants.createdDirectory, true);
+            var uploadDir = Path.Combine(new[] { Constants.createdDirectory, datePath });
+            var uploadFilePath = Path.Combine(new[] { uploadDir, $"{pilotBlModel.FirstName}_{pilotBlModel.LastName}_ApplicationForm.pdf" });
+
+            // Create document.
+            var pdfHelper = new PdfHelper();
+            var pdfDocument = pdfHelper.GenerateDocument(pilotBlModel);
+            // Save the document.
+            pdfDocument.Save(uploadFilePath);
         }
 
         ///<inheritdoc/>

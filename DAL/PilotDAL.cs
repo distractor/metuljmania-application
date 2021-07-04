@@ -82,7 +82,7 @@ namespace MetuljmaniaDatabase.DAL
                 pilotDbModel.Civlid = pilot.Civlid;
                 pilotDbModel.BirthDate = pilot.BirthDate;
                 pilotDbModel.MobilePhone = pilot.MobilePhone;
-                pilotDbModel.Adress = pilot.Adress;
+                pilotDbModel.Address = pilot.Address;
                 pilotDbModel.FlyingSince = pilot.FlyingSince;
                 pilotDbModel.Team = pilot.Team;
                 pilotDbModel.Nation = pilot.Nation;

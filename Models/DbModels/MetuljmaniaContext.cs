@@ -53,7 +53,7 @@ namespace MetuljmaniaDatabase.Models.DbModels
 
             modelBuilder.Entity<Pilot>(entity =>
             {
-                entity.Property(e => e.Adress).HasMaxLength(200);
+                entity.Property(e => e.Address).HasMaxLength(200);
 
                 entity.Property(e => e.BirthDate).HasColumnType("date");
 

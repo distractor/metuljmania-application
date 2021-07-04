@@ -47,7 +47,7 @@ namespace MetuljmaniaDatabase.Models.DTO
         /// <summary>
         /// Adress.
         /// </summary>
-        public string Adress { get; set; }
+        public string Address { get; set; }
 
         /// <summary>
         /// Flying since.
