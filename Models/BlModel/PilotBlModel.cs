@@ -105,7 +105,7 @@ namespace MetuljmaniaDatabase.Models.BlModel
         /// <summary>
         /// Sponsors.
         /// </summary>
-        public string[] Sponsors { get; set; }
+        public string Sponsors { get; set; }
 
         /// <summary>
         /// Email.

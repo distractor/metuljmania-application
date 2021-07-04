@@ -107,7 +107,7 @@ namespace MetuljmaniaDatabase.Models.DTO
         /// <summary>
         /// Sponsor list.
         /// </summary>
-        public string[] Sponsors { get; set; }
+        public string Sponsors { get; set; }
 
         /// <summary>
         /// Email.
