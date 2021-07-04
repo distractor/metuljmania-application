@@ -21,7 +21,7 @@ namespace MetuljmaniaDatabase.Helpers
             // Create an empty page.
             PdfPage page = document.AddPage();
 
-            // Create a font.
+            // Create fonts.
             XFont font = new("Times New Roman", 12, XFontStyle.Regular);
             XFont fontBold = new("Times New Roman", 12, XFontStyle.Bold);
             XFont fontHeader = new("Times New Roman", 18, XFontStyle.Bold);

@@ -1,4 +1,6 @@
-﻿using MetuljmaniaDatabase.Models.DbModels;
+﻿using MetuljmaniaDatabase.Helpers;
+using MetuljmaniaDatabase.Logic;
+using MetuljmaniaDatabase.Models.DbModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -47,7 +49,9 @@ namespace MetuljmaniaDatabase.DAL
 
                 // Assign missing values.
                 pilot.CreatedDate = DateTime.UtcNow;
+                pilot.Password = StringHelper.RandomString(Constants.PasswordLength);
                 pilot.File = null;
+                pilot.Event = await dbMetuljmaniaContext.Event.FirstAsync(e => e.Id == pilot.Event.Id);
 
                 // Post.
                 dbMetuljmaniaContext.Pilot.Add(pilot);

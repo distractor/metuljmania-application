@@ -18,5 +18,6 @@ namespace MetuljmaniaDatabase.Logic
         // Glista settings.
         public static readonly string DecimalSeparator = s_metuljmania["DecimalSeparator"];
         public static readonly string GroupSeparator = s_metuljmania["GroupSeparator"];
+        public static readonly int PasswordLength = int.Parse(s_metuljmania["PasswordLength"]);
     }
 }
