@@ -1,4 +1,5 @@
 ﻿using MetuljmaniaDatabase.Models.BlModel;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -33,6 +34,22 @@ namespace MetuljmaniaDatabase.Bl
         /// <param name="pilot">New pilot object.</param>
         /// <returns></returns>
         Task<PilotBlModel> PostPilotAsync(PilotBlModel pilot);
+
+        /// <summary>
+        /// Create and send application form for pilot.
+        /// </summary>
+        /// <param name="pilotId">Pilot id.</param>
+        /// <returns></returns>
+        Task CreateApplicationFormAsync(int pilotId);
+
+        /// <summary>
+        /// Add pilots.
+        /// </summary>
+        /// <param name="fsdbFile">Fsdb file.</param>
+        /// <param name="csvFile">Csv file.</param>
+        /// <param name="eventId">Event id.</param>
+        /// <returns></returns>
+        Task PostPilotsAsync(IFormFile fsdbFile, IFormFile csvFile, int eventId);
 
         /// <summary>
         /// Edit pilot.

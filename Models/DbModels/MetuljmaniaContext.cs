@@ -53,7 +53,7 @@ namespace MetuljmaniaDatabase.Models.DbModels
 
             modelBuilder.Entity<Pilot>(entity =>
             {
-                entity.Property(e => e.Adress).HasMaxLength(200);
+                entity.Property(e => e.Address).HasMaxLength(200);
 
                 entity.Property(e => e.BirthDate).HasColumnType("date");
 
@@ -97,7 +97,7 @@ namespace MetuljmaniaDatabase.Models.DbModels
 
                 entity.Property(e => e.SafetyClass).HasMaxLength(50);
 
-                entity.Property(e => e.Sponsors).HasColumnType("character varying(500)[]");
+                entity.Property(e => e.Sponsors).HasMaxLength(500);
 
                 entity.Property(e => e.Team).HasMaxLength(100);
 
@@ -121,6 +121,16 @@ namespace MetuljmaniaDatabase.Models.DbModels
                     .WithMany(p => p.PilotLicenceFile)
                     .HasForeignKey(d => d.LicenceFileId)
                     .HasConstraintName("LicenceFileId");
+
+                entity.HasOne(d => d.SignedApplicationFile)
+                    .WithMany(p => p.PilotSignedApplicationFile)
+                    .HasForeignKey(d => d.SignedApplicationFileId)
+                    .HasConstraintName("SignedFileId");
+
+                entity.HasOne(d => d.UnSignedApplicationFile)
+                    .WithMany(p => p.PilotUnSignedApplicationFile)
+                    .HasForeignKey(d => d.UnSignedApplicationFileId)
+                    .HasConstraintName("UnSignedFileId");
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -13,6 +13,8 @@ namespace MetuljmaniaDatabase.Models.DbModels
             PilotCheckFile = new HashSet<Pilot>();
             PilotIppiFile = new HashSet<Pilot>();
             PilotLicenceFile = new HashSet<Pilot>();
+            PilotSignedApplicationFile = new HashSet<Pilot>();
+            PilotUnSignedApplicationFile = new HashSet<Pilot>();
         }
 
         public int Id { get; set; }
@@ -24,5 +26,7 @@ namespace MetuljmaniaDatabase.Models.DbModels
         public virtual ICollection<Pilot> PilotCheckFile { get; set; }
         public virtual ICollection<Pilot> PilotIppiFile { get; set; }
         public virtual ICollection<Pilot> PilotLicenceFile { get; set; }
+        public virtual ICollection<Pilot> PilotSignedApplicationFile { get; set; }
+        public virtual ICollection<Pilot> PilotUnSignedApplicationFile { get; set; }
     }
 }

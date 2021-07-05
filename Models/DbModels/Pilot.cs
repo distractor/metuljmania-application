@@ -21,7 +21,7 @@ namespace MetuljmaniaDatabase.Models.DbModels
         public string Civlid { get; set; }
         public DateTime? BirthDate { get; set; }
         public string MobilePhone { get; set; }
-        public string Adress { get; set; }
+        public string Address { get; set; }
         public int? FlyingSince { get; set; }
         public string Team { get; set; }
         public string Nation { get; set; }
@@ -32,7 +32,6 @@ namespace MetuljmaniaDatabase.Models.DbModels
         public string PolicyNumber { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? ModifiedDate { get; set; }
-        public string[] Sponsors { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public int? IppiFileId { get; set; }
@@ -40,11 +39,16 @@ namespace MetuljmaniaDatabase.Models.DbModels
         public int? CheckFileId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string Sponsors { get; set; }
+        public int? SignedApplicationFileId { get; set; }
+        public int? UnSignedApplicationFileId { get; set; }
 
         public virtual File CheckFile { get; set; }
         public virtual Event Event { get; set; }
         public virtual File IppiFile { get; set; }
         public virtual File LicenceFile { get; set; }
+        public virtual File SignedApplicationFile { get; set; }
+        public virtual File UnSignedApplicationFile { get; set; }
         public virtual ICollection<File> File { get; set; }
     }
 }

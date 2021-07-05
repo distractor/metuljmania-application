@@ -1,5 +1,4 @@
-﻿using MetuljmaniaDatabase.Logic;
-using System;
+﻿using System;
 using System.IO;
 
 namespace MetuljmaniaDatabase.Helpers
@@ -9,9 +8,10 @@ namespace MetuljmaniaDatabase.Helpers
         /// <summary>
         /// Uses date to create upload directory if it does not already exist.
         /// </summary>
-        /// <param name="create">Create directory if needed.</param>
+        /// <param name="directory">Directory.</param>
+        /// <param name="create">Create.</param>
         /// <returns></returns>
-        public static string GetUploadDirectory(bool create = false)
+        public static string GetUploadDirectory(string directory, bool create = false)
         {
             var today = DateTime.UtcNow.Date;
 
@@ -20,7 +20,7 @@ namespace MetuljmaniaDatabase.Helpers
             // Directory.
             if (!Directory.Exists(path) && create)
             {
-                Directory.CreateDirectory(Path.Combine(new[] { Constants.uploadDirectory, path }));
+                Directory.CreateDirectory(Path.Combine(new[] { directory, path }));
             }
 
             return path;

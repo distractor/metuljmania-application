@@ -32,7 +32,7 @@ namespace MetuljmaniaDatabase.Controllers
         /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
-        public async Task<ActionResult<List<FileDTO>>> PostFilesAsync(IFormFile file, int pilotId)
+        public async Task<ActionResult<FileDTO>> PostFilesAsync(IFormFile file, int pilotId)
         {
             // Post file.
             var uploadedFiles = await _fileBl.PostFilesAsync(file, pilotId);

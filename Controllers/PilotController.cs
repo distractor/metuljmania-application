@@ -3,6 +3,7 @@ using MetuljmaniaDatabase.Bl;
 using MetuljmaniaDatabase.Models.BlModel;
 using MetuljmaniaDatabase.Models.DTO;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Security.Principal;
@@ -90,12 +91,46 @@ namespace MetuljmaniaDatabase.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<PilotDTO>> PostPilotAsync(NewPilotDTO newPilotDTO)
         {
-            // Post new event group.
+            // Post new pilot.
             var newPilotBlModel = _mapper.Map<PilotBlModel>(newPilotDTO);
             var insertedPilotBlModel = await _pilotBl.PostPilotAsync(newPilotBlModel);
             var insertedPilotDTO = _mapper.Map<PilotDTO>(insertedPilotBlModel);
 
             return CreatedAtAction("GetPilot", new { id = insertedPilotDTO.Id }, insertedPilotDTO);
+        }
+
+        // POST api/<PilotController>
+        /// <summary>
+        /// Create application form for pilot.
+        /// </summary>
+        /// <param name="pilotId">Pilot id</param>
+        /// <returns></returns>
+        [HttpPost("CreateApplicationFormAsync")]
+        [AllowAnonymous]
+        public async Task<ActionResult> CreateApplicationFormAsync(int pilotId)
+        {
+            // Post new event group.
+            await _pilotBl.CreateApplicationFormAsync(pilotId);
+
+            return Ok();
+        }
+
+        // POST api/<PilotController>
+        /// <summary>
+        /// Add pilots.
+        /// </summary>
+        /// <param name="fsdbFile">Fsdb file.</param>
+        /// <param name="csvFile">Csv file.</param>
+        /// <param name="eventId">Event id.</param>
+        /// <returns></returns>
+        [HttpPost("PostPilotsAsync")]
+        [AllowAnonymous]
+        public async Task<ActionResult> PostPilotsAsync(IFormFile fsdbFile, IFormFile csvFile, int eventId)
+        {
+            // Post new event group.
+            await _pilotBl.PostPilotsAsync(fsdbFile, csvFile, eventId);
+
+            return Ok();
         }
 
         // PUT: api/Pilot/5

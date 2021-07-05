@@ -1,4 +1,6 @@
-﻿using MetuljmaniaDatabase.Models.DbModels;
+﻿using MetuljmaniaDatabase.Helpers;
+using MetuljmaniaDatabase.Logic;
+using MetuljmaniaDatabase.Models.DbModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -31,6 +33,8 @@ namespace MetuljmaniaDatabase.DAL
                 .Include(p => p.CheckFile)
                 .Include(p => p.LicenceFile)
                 .Include(p => p.IppiFile)
+                .Include(p => p.SignedApplicationFile)
+                .Include(p => p.UnSignedApplicationFile)
                 .FirstOrDefaultAsync(p => p.Id == id);
 
             return pilot;
@@ -47,7 +51,9 @@ namespace MetuljmaniaDatabase.DAL
 
                 // Assign missing values.
                 pilot.CreatedDate = DateTime.UtcNow;
+                pilot.Password = StringHelper.RandomString(Constants.PasswordLength);
                 pilot.File = null;
+                pilot.Event = await dbMetuljmaniaContext.Event.FirstAsync(e => e.Id == pilot.Event.Id);
 
                 // Post.
                 dbMetuljmaniaContext.Pilot.Add(pilot);
@@ -82,7 +88,7 @@ namespace MetuljmaniaDatabase.DAL
                 pilotDbModel.Civlid = pilot.Civlid;
                 pilotDbModel.BirthDate = pilot.BirthDate;
                 pilotDbModel.MobilePhone = pilot.MobilePhone;
-                pilotDbModel.Adress = pilot.Adress;
+                pilotDbModel.Address = pilot.Address;
                 pilotDbModel.FlyingSince = pilot.FlyingSince;
                 pilotDbModel.Team = pilot.Team;
                 pilotDbModel.Nation = pilot.Nation;
@@ -94,6 +100,8 @@ namespace MetuljmaniaDatabase.DAL
                 pilotDbModel.IppiFileId = pilot.IppiFileId != 0 ? pilot.IppiFileId : null;
                 pilotDbModel.LicenceFileId = pilot.LicenceFileId != 0 ? pilot.LicenceFileId : null;
                 pilotDbModel.CheckFileId = pilot.CheckFileId != 0 ? pilot.CheckFileId : null;
+                pilotDbModel.SignedApplicationFileId = pilot.SignedApplicationFileId != 0 ? pilot.SignedApplicationFileId : null;
+                pilotDbModel.UnSignedApplicationFileId = pilot.UnSignedApplicationFileId != 0 ? pilot.UnSignedApplicationFileId : null;
                 pilotDbModel.Sponsors = pilot.Sponsors;
                 pilotDbModel.Email = pilot.Email;
                 pilotDbModel.FirstName = pilot.FirstName;

@@ -47,7 +47,7 @@ namespace MetuljmaniaDatabase.Models.DTO
         /// <summary>
         /// Adress.
         /// </summary>
-        public string Adress { get; set; }
+        public string Address { get; set; }
 
         /// <summary>
         /// Flying since.
@@ -103,6 +103,16 @@ namespace MetuljmaniaDatabase.Models.DTO
         /// Glider check file.
         /// </summary>
         public int? CheckFileId { get; set; }
+
+        /// <summary>
+        /// Signed application file.
+        /// </summary>
+        public int? SignedApplicationFileId { get; set; }
+
+        /// <summary>
+        /// Unsigned application file.
+        /// </summary>
+        public int? UnSignedApplicationFileId { get; set; }
 
         /// <summary>
         /// Sponsor list.
