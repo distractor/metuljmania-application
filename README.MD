@@ -9,11 +9,11 @@ Obtain the `appsettings.json`.
 First go to `root/` and run
 
 ```sh
-docker build -t glista/dockerapi .
+docker build -t metuljmania/dockerapi .
 ```
 
 after the image is build run docker image with
 
 ```sh
-docker run -p 8080:80 glista/dockerapi
+docker run -p 8080:80 metuljmania/dockerapi
 ```
