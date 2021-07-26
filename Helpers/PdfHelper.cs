@@ -22,12 +22,12 @@ namespace MetuljmaniaDatabase.Helpers
             PdfPage page = document.AddPage();
 
             // Create fonts.
-            XFont font = new("Times New Roman", 12, XFontStyle.Regular);
-            XFont fontSmall = new("Times New Roman", 10, XFontStyle.Bold);
-            XFont fontBold = new("Times New Roman", 12, XFontStyle.Bold);
-            XFont fontHeader = new("Times New Roman", 18, XFontStyle.Bold);
-            XFont fontItalic = new("Times New Roman", 12, XFontStyle.Italic);
-            XFont fontFooter = new("Times New Roman", 10, XFontStyle.Italic);
+            XFont font = new("Times New Roman", 10, XFontStyle.Regular);
+            XFont fontSmall = new("Times New Roman", 6, XFontStyle.Bold);
+            XFont fontBold = new("Times New Roman", 10, XFontStyle.Bold);
+            XFont fontHeader = new("Times New Roman", 16, XFontStyle.Bold);
+            XFont fontItalic = new("Times New Roman", 10, XFontStyle.Italic);
+            XFont fontFooter = new("Times New Roman", 8, XFontStyle.Italic);
 
             // Get an XGraphics object for drawing.
             XGraphics gfx = XGraphics.FromPdfPage(page);
@@ -112,22 +112,22 @@ namespace MetuljmaniaDatabase.Helpers
             gfx.DrawString("Uploaded files:", fontHeader, XBrushes.Black, x, y);
             y += ls_header;
             // Flying licence.
-            gfx.DrawString("Licence:", fontSmall, XBrushes.Black, x, y);
+            gfx.DrawString("Licence:", font, XBrushes.Black, x, y);
             y += ls;
             gfx.DrawString(pilot.LicenceFile != null ?
-            $"Yes, {pilot.LicenceFile.Path} uploaded on {pilot.LicenceFile.UploadedDate}." : "Missing", fontBold, XBrushes.Black, x, y);
+            $"Yes, {pilot.LicenceFile.Path} uploaded on {pilot.LicenceFile.UploadedDate}." : "Missing", fontSmall, XBrushes.Black, x, y);
             y += ls;
             // IPPI.
-            gfx.DrawString("IPPI card:", fontSmall, XBrushes.Black, x, y);
+            gfx.DrawString("IPPI card:", font, XBrushes.Black, x, y);
             y += ls;
             gfx.DrawString(pilot.IppiFile != null ?
-              $"Yes, {pilot.IppiFile.Path} uploaded on {pilot.IppiFile.UploadedDate}." : "Missing", fontBold, XBrushes.Black, x, y);
+              $"Yes, {pilot.IppiFile.Path} uploaded on {pilot.IppiFile.UploadedDate}." : "Missing", fontSmall, XBrushes.Black, x, y);
             y += ls;
             // Glider check.
-            gfx.DrawString("Glider check:", fontSmall, XBrushes.Black, x, y);
+            gfx.DrawString("Glider check:", font, XBrushes.Black, x, y);
             y += ls;
             gfx.DrawString(pilot.CheckFile != null ?
-             $"Yes, {pilot.CheckFile.Path} uploaded on {pilot.CheckFile.UploadedDate}." : "Missing", fontBold, XBrushes.Black, x, y);
+             $"Yes, {pilot.CheckFile.Path} uploaded on {pilot.CheckFile.UploadedDate}." : "Missing", fontSmall, XBrushes.Black, x, y);
             y += 2 * ls;
 
             // Responsibility.
@@ -189,5 +189,6 @@ namespace MetuljmaniaDatabase.Helpers
 
             return document;
         }
+
     }
 }

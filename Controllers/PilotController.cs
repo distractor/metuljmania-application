@@ -133,9 +133,7 @@ namespace MetuljmaniaDatabase.Controllers
             await _pilotBl.PostPilotsAsync(fsdbFile, csvFile, eventId);
 
             return Ok();
-
-
-        }        
+        }
 
         // PUT: api/Pilot/5
         /// <summary>
