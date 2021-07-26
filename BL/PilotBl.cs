@@ -97,9 +97,11 @@ namespace MetuljmaniaDatabase.Bl
             var pdfHelper = new PdfHelper();
             var pdfDocument = pdfHelper.GenerateDocument(pilotBlModel);
             // Save the document.
+            _logger.Info($"Saving pdf {uploadFilePath}.");
             pdfDocument.Save(uploadFilePath);
 
             // Update pilot.
+            _logger.Info($"Updating pilot {pilotId}.");
             var uploadedFile = await _baseDAL.PostFilesAsync(new Models.DbModels.File { Path = uploadFilePath, PilotId = pilotBlModel.Id }, pilotBlModel.Id);
             pilotBlModel.UnSignedApplicationFile = _mapper.Map<FileBlModel>(uploadedFile);
             await _baseDAL.PutPilotAsync(_mapper.Map<Pilot>(pilotBlModel));
