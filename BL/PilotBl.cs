@@ -140,7 +140,7 @@ namespace MetuljmaniaDatabase.Bl
                 var phone = fields[9].Trim();
                 var email = fields[10].Trim();
                 var flyingSinceString = fields[16].Trim();
-                int.TryParse(flyingSinceString, out int flyingSince);
+                _ = int.TryParse(flyingSinceString, out int flyingSince);
                 var licence = fields[14].Trim();
 
                 pilots.Add(new PilotBlModel { FirstName = firstName, LastName = lastName, MobilePhone = phone, Email = email, FlyingSince = flyingSince, Licence = licence });
@@ -180,10 +180,14 @@ namespace MetuljmaniaDatabase.Bl
             }
 
             // Post to database.
+            var pilotsInDB = await _baseDAL.GetPilotsAsync();
             foreach (var pilot in pilots)
             {
                 var pilotDbModel = _mapper.Map<Pilot>(pilot);
-                await _baseDAL.PostPilotAsync(pilotDbModel);
+                if (!pilotsInDB.Any(p => p.FirstName == pilotDbModel.FirstName && p.LastName == pilotDbModel.LastName && p.Email == pilotDbModel.Email))
+                {
+                    await _baseDAL.PostPilotAsync(pilotDbModel);
+                }
             }
         }
 
