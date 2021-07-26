@@ -25,6 +25,7 @@ namespace MetuljmaniaDatabase.Helpers
                 Timeout = Constants.Timeout
             };
         }
+
         public void Send(string toAddress, string subject, string body, string attachmentFilepath)
         {
             using var message = new MailMessage(Constants.FromAddress, toAddress)
@@ -34,6 +35,18 @@ namespace MetuljmaniaDatabase.Helpers
                 IsBodyHtml = true
             };
             message.Attachments.Add(new Attachment(attachmentFilepath));
+
+            smtpClient.Send(message);
+        }
+
+        public void Send(string toAddress, string subject, string body)
+        {
+            using var message = new MailMessage(Constants.FromAddress, toAddress)
+            {
+                Subject = subject,
+                Body = body,
+                IsBodyHtml = true
+            };
 
             smtpClient.Send(message);
         }

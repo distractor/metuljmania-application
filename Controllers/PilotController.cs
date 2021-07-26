@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using MetuljmaniaDatabase.Bl;
+using MetuljmaniaDatabase.Helpers;
 using MetuljmaniaDatabase.Models.BlModel;
 using MetuljmaniaDatabase.Models.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Security.Principal;
 using System.Threading.Tasks;
@@ -131,7 +133,9 @@ namespace MetuljmaniaDatabase.Controllers
             await _pilotBl.PostPilotsAsync(fsdbFile, csvFile, eventId);
 
             return Ok();
-        }
+
+
+        }        
 
         // PUT: api/Pilot/5
         /// <summary>

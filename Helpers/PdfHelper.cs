@@ -1,6 +1,6 @@
 ﻿using MetuljmaniaDatabase.Models.BlModel;
-using PdfSharp.Drawing;
-using PdfSharp.Pdf;
+using PdfSharpCore.Drawing;
+using PdfSharpCore.Pdf;
 using System;
 
 namespace MetuljmaniaDatabase.Helpers
