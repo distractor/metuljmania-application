@@ -15,5 +15,5 @@ docker build -t metuljmania/dockerapi .
 after the image is build run docker image with
 
 ```sh
-docker run --name backend --mount type=bind,source=/home/mjancic/Documents/Uploads,target=/Uploads -p 8081:80 metuljmania/dockerapi
+docker run --name backend --mount type=bind,source=/home/mjancic/Documents/Data,target=/Data -p 8081:80 metuljmania/dockerapi
 ```

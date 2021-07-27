@@ -87,8 +87,7 @@ namespace MetuljmaniaDatabase.Bl
             var pilotBlModel = await GetPilotAsync(pilotId);
 
             // Create directory if needed.
-            var datePath = FileManagerHelper.GetUploadDirectory(Constants.createdDirectory, true);
-            var uploadDir = Path.Combine(new[] { Constants.createdDirectory, datePath });
+            var uploadDir = FileManagerHelper.GetUploadDirectory(Constants.createdDirectory, true);
             var uploadFilePath = Path.Combine(new[] { uploadDir, $"{pilotBlModel.FirstName}_{pilotBlModel.LastName}_ApplicationForm.pdf" });
 
             // Create document.
@@ -228,7 +227,7 @@ namespace MetuljmaniaDatabase.Bl
 
             // Message.
             var subject = "Application form generated";
-            var body = $"<h1>Hi, {pilot.FirstName} {pilot.LastName}!</h1><p>You registered for paragliding cross country competition <strong>{pilot.Event.Name}</strong> and a few seconds ago you have requested the official application form. Attached we are sending you the automatically generated application form (PDF).</p><p>Please check all the data on the attached file and: <ul><li>Use your digital identity to sign it and <strong><a href=\"http://89.142.194.106/upload\">upload it back to our database</a></strong> or</li><li>bring a signed physical copy to the registration office.</li></ul></p><p>Thank you!</p>";
+            var body = $"<h1>Hi, {pilot.FirstName} {pilot.LastName}!</h1><p>You registered for paragliding cross country competition <strong>{pilot.Event.Name}</strong> and a few seconds ago you have requested the official application form. Attached we are sending you the automatically generated application form (PDF).</p><h5>Ps.:</h5><p>It is <strong>NOT</strong> obligatory, but if you wish you can sign the PDF and upload it back to our database <strong><a href=\"http://89.142.194.106/upload\">following this link (http://89.142.194.106/upload)</a></strong>.</p><p>Thank you!</p>";
 
             // Send message.
             try
