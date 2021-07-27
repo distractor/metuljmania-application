@@ -230,7 +230,7 @@ namespace MetuljmaniaDatabase.Bl
 
             // Message.
             var subject = "Application form generated";
-            var body = $"<h1>Hi, {pilot.FirstName} {pilot.LastName}!</h1><p>You registered for paragliding cross country competition <strong>{pilot.Event.Name}</strong> and a few seconds ago you have requested the official application form. Attached we are sending you the automatically generated application form (PDF).</p><p>Please check all the data on the attached file and: <ul><li>Use your digital identity to sign it and upload it back to our database or</li><li>bring a signed physical copy to the registration office.</li></ul></p><p>Thank you!</p>";
+            var body = $"<h1>Hi, {pilot.FirstName} {pilot.LastName}!</h1><p>You registered for paragliding cross country competition <strong>{pilot.Event.Name}</strong> and a few seconds ago you have requested the official application form. Attached we are sending you the automatically generated application form (PDF).</p><p>Please check all the data on the attached file and: <ul><li>Use your digital identity to sign it and <strong><a href=\"http://89.142.194.106/upload\">upload it back to our database</a></strong> or</li><li>bring a signed physical copy to the registration office.</li></ul></p><p>Thank you!</p>";
 
             // Send message.
             try
