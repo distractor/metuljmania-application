@@ -57,6 +57,7 @@ namespace MetuljmaniaDatabase
             services.AddTransient<IEventBl, EventBl>();
             services.AddTransient<IFileBl, FileBl>();
             services.AddTransient<IPilotBl, PilotBl>();
+            services.AddTransient<INotificationBL, NotificationBl>();
 
             // Enable CORS.
             services.AddCors();
@@ -64,7 +65,8 @@ namespace MetuljmaniaDatabase
             // Add controllers.
             services.AddControllersWithViews()
                 .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
-            services.AddControllers();
+
+            services.AddControllers(options => options.AllowEmptyInputInBodyModelBinding = true);
 
             // Configure AutoMapper.
             // Auto Mapper Configurations.

@@ -20,13 +20,11 @@ namespace MetuljmaniaDatabase.Bl
     {
         private readonly IBaseDAL _baseDAL;
         private readonly IEventBl _eventBl;
-        private readonly IFileBl _fileBl;
 
-        public PilotBl(IMapper mapper, IPrincipal principal, IBaseDAL baseDAL, IEventBl eventBl, IFileBl fileBl) : base(mapper, principal)
+        public PilotBl(IMapper mapper, IPrincipal principal, IBaseDAL baseDAL, IEventBl eventBl) : base(mapper, principal)
         {
             _baseDAL = baseDAL;
             _eventBl = eventBl;
-            _fileBl = fileBl;
         }
 
         #region Public methods.
