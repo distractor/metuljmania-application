@@ -20,13 +20,11 @@ namespace MetuljmaniaDatabase.Bl
     {
         private readonly IBaseDAL _baseDAL;
         private readonly IEventBl _eventBl;
-        private readonly IFileBl _fileBl;
 
-        public PilotBl(IMapper mapper, IPrincipal principal, IBaseDAL baseDAL, IEventBl eventBl, IFileBl fileBl) : base(mapper, principal)
+        public PilotBl(IMapper mapper, IPrincipal principal, IBaseDAL baseDAL, IEventBl eventBl) : base(mapper, principal)
         {
             _baseDAL = baseDAL;
             _eventBl = eventBl;
-            _fileBl = fileBl;
         }
 
         #region Public methods.
@@ -89,17 +87,18 @@ namespace MetuljmaniaDatabase.Bl
             var pilotBlModel = await GetPilotAsync(pilotId);
 
             // Create directory if needed.
-            var datePath = FileManagerHelper.GetUploadDirectory(Constants.createdDirectory, true);
-            var uploadDir = Path.Combine(new[] { Constants.createdDirectory, datePath });
+            var uploadDir = FileManagerHelper.GetUploadDirectory(Constants.createdDirectory, true);
             var uploadFilePath = Path.Combine(new[] { uploadDir, $"{pilotBlModel.FirstName}_{pilotBlModel.LastName}_ApplicationForm.pdf" });
 
             // Create document.
             var pdfHelper = new PdfHelper();
             var pdfDocument = pdfHelper.GenerateDocument(pilotBlModel);
             // Save the document.
+            _logger.Info($"Saving pdf {uploadFilePath}.");
             pdfDocument.Save(uploadFilePath);
 
             // Update pilot.
+            _logger.Info($"Updating pilot {pilotId}.");
             var uploadedFile = await _baseDAL.PostFilesAsync(new Models.DbModels.File { Path = uploadFilePath, PilotId = pilotBlModel.Id }, pilotBlModel.Id);
             pilotBlModel.UnSignedApplicationFile = _mapper.Map<FileBlModel>(uploadedFile);
             await _baseDAL.PutPilotAsync(_mapper.Map<Pilot>(pilotBlModel));
@@ -140,7 +139,7 @@ namespace MetuljmaniaDatabase.Bl
                 var phone = fields[9].Trim();
                 var email = fields[10].Trim();
                 var flyingSinceString = fields[16].Trim();
-                int.TryParse(flyingSinceString, out int flyingSince);
+                _ = int.TryParse(flyingSinceString, out int flyingSince);
                 var licence = fields[14].Trim();
 
                 pilots.Add(new PilotBlModel { FirstName = firstName, LastName = lastName, MobilePhone = phone, Email = email, FlyingSince = flyingSince, Licence = licence });
@@ -180,10 +179,14 @@ namespace MetuljmaniaDatabase.Bl
             }
 
             // Post to database.
+            var pilotsInDB = await _baseDAL.GetPilotsAsync();
             foreach (var pilot in pilots)
             {
                 var pilotDbModel = _mapper.Map<Pilot>(pilot);
-                await _baseDAL.PostPilotAsync(pilotDbModel);
+                if (!pilotsInDB.Any(p => p.FirstName == pilotDbModel.FirstName && p.LastName == pilotDbModel.LastName && p.Email == pilotDbModel.Email))
+                {
+                    await _baseDAL.PostPilotAsync(pilotDbModel);
+                }
             }
         }
 
@@ -224,7 +227,7 @@ namespace MetuljmaniaDatabase.Bl
 
             // Message.
             var subject = "Application form generated";
-            var body = $"<h1>Hi, {pilot.FirstName} {pilot.LastName}!</h1><p>You registered for paragliding cross country competition <strong>{pilot.Event.Name}</strong> and a few seconds ago you have requested the official application form. Attached we are sending you the automatically generated application form (PDF).</p><p>Please check all the data on the attached file and: <ul><li>Use your digital identity to sign it and upload it back to our database or</li><li>bring a signed physical copy to the registration office.</li></ul></p><p>Thank you!</p>";
+            var body = $"<h1>Hi, {pilot.FirstName} {pilot.LastName}!</h1><p>You registered for paragliding cross country competition <strong>{pilot.Event.Name}</strong> and a few seconds ago you have requested the official application form. Attached we are sending you the automatically generated application form (PDF).</p><h5>Ps.:</h5><p>It is <strong>NOT</strong> obligatory, but if you wish you can sign the PDF and upload it back to our database <strong><a href=\"http://89.142.194.106/upload\">following this link (http://89.142.194.106/upload)</a></strong>.</p><p>Thank you!</p>";
 
             // Send message.
             try

@@ -35,9 +35,6 @@ namespace MetuljmaniaDatabase.Models.DbModels
 
             modelBuilder.Entity<File>(entity =>
             {
-                entity.HasIndex(e => e.Path, "FilePath")
-                    .IsUnique();
-
                 entity.Property(e => e.Path)
                     .IsRequired()
                     .HasMaxLength(200);

@@ -13,17 +13,13 @@ namespace MetuljmaniaDatabase.Helpers
         /// <returns></returns>
         public static string GetUploadDirectory(string directory, bool create = false)
         {
-            var today = DateTime.UtcNow.Date;
-
-            var path = Path.Combine(new[] { today.Year.ToString(), today.Month.ToString(), today.Day.ToString() });
-
             // Directory.
-            if (!Directory.Exists(path) && create)
+            if (!Directory.Exists(directory) && create)
             {
-                Directory.CreateDirectory(Path.Combine(new[] { directory, path }));
+                Directory.CreateDirectory(directory);
             }
 
-            return path;
+            return directory;
         }
 
         /// <summary>
