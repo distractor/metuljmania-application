@@ -2,6 +2,7 @@
 using MetuljmaniaDatabase.DAL;
 using MetuljmaniaDatabase.Helpers;
 using MetuljmaniaDatabase.Models.BlModel;
+using MetuljmaniaDatabase.Models.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +32,7 @@ namespace MetuljmaniaDatabase.Bl
             NotifyPilot(pilotBLModel);
         }
 
-        public async Task NotifyPilotsAsync(List<int>? pilotIds = null)
+        public async Task<NotificationSummaryDTO> NotifyPilotsAsync(List<int>? pilotIds = null)
         {
             if (pilotIds == null)
             {
@@ -39,11 +40,27 @@ namespace MetuljmaniaDatabase.Bl
                 pilotIds = pilotsBlModel.Select(p => p.Id).ToList();
             }
 
+            var notificationSummary = new NotificationSummaryDTO
+            {
+                PilotIds = pilotIds
+            };
+            var pilotIdsSent = new List<int>();
             foreach (var pilotId in pilotIds)
             {
                 _ = NotifyPilotAsync(pilotId);
+                pilotIdsSent.Add(pilotId);
                 Thread.Sleep(5000); // It is allowed to send ABOUT 20 mails per second.
             }
+            notificationSummary.PilotIdsSent = pilotIdsSent;
+
+            // Check success status.
+            notificationSummary.Success = true;
+            foreach (var pilotId in pilotIds)
+            {
+                notificationSummary.Success = notificationSummary.Success && notificationSummary.PilotIdsSent.Any(id => id == pilotId);
+            }
+
+            return notificationSummary;
         }
 
         #endregion
@@ -56,7 +73,7 @@ namespace MetuljmaniaDatabase.Bl
 
             // Message.
             var subject = "Event registration form";
-            var body = $"<h1>Hi, {pilot.FirstName} {pilot.LastName}!</h1><p>You registered for paragliding cross country competition <strong>{pilot.Event.Name}</strong>.</p><p>To speed up the registration process, we have developed a web application where the registration process can be completed from your home couch. Please go to <strong><a href=\"http://89.142.194.106/application\">application page (link: http://89.142.194.106/application)</a></strong> and use the password that was sent to you to reveal your personal data.</p><p><strong>Password: </strong>{pilot.Password}</p><p>Please check and correct your data. We kindly encourage you to upload scan or image of your IPPI card, licence and proof of airworthiness, otherwise you will have to show all of them on the spot. Once you complete, click the <strong>submit</strong> button and a PDF file with your data will be generated, stored to our database and sent to your email.</p><p>Thank you!</p>";
+            var body = $"<h1>Hi, {pilot.FirstName} {pilot.LastName}!</h1><p>You registered for paragliding cross country competition <strong>{pilot.Event.Name}</strong>.</p><p>To speed up the registration process, we have developed a web application where the registration process can be completed from your home couch. Please go to <strong><a href=\"https://app.metuljmania.com\">application page</a></strong> and use the password that was sent to you to reveal your personal data.</p><p><strong>Password: </strong>{pilot.Password}</p><p>Please check and correct your data. We kindly encourage you to upload scan or image of your IPPI card, licence and proof of airworthiness, otherwise you will have to show all of them on the spot. Once you complete, click the <strong>submit</strong> button and a PDF file with your data will be generated, stored to our database and sent to your email.</p><p>Thank you!</p>";
 
             // Send message.
             try

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MetuljmaniaDatabase.Bl;
+using MetuljmaniaDatabase.Models.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -48,13 +49,13 @@ namespace MetuljmaniaDatabase.Controllers
         /// <returns></returns>
         [HttpPost("NotifyPilots")]
         [AllowAnonymous]
-        public async Task<ActionResult> NotifyPilotsAsync(List<int>? pilotIds = null)
+        public async Task<ActionResult<NotificationSummaryDTO>> NotifyPilotsAsync(List<int>? pilotIds = null)
         {
             // Notify pilots.
-            await _notificationBL.NotifyPilotsAsync(pilotIds);
+            var notificationSummary = await _notificationBL.NotifyPilotsAsync(pilotIds);
 
 
-            return Ok();
+            return Ok(notificationSummary);
         }
     }
 }

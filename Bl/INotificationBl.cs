@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MetuljmaniaDatabase.Models.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,6 +20,6 @@ namespace MetuljmaniaDatabase.Bl
         /// </summary>
         /// <param name="pilotIds">Pilot ids.</param>
         /// <returns></returns>
-        Task NotifyPilotsAsync(List<int>? pilotIds = null);
+        Task<NotificationSummaryDTO> NotifyPilotsAsync(List<int>? pilotIds = null);
     }
 }
